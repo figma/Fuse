@@ -91,7 +91,6 @@
     "vue-codemirror": "^4.0.6",
     "vue-eslint-parser": "^8.0.1",
     "vuepress": "^1.4.0",
-    "vuepress-plugin-element-tabs": "^0.2.8",
     "vuepress-plugin-google-adsense": "^0.2.1",
     "vuepress-plugin-smooth-scroll": "^0.0.10",
     "vuepress-plugin-social-share": "^1.1.0",
