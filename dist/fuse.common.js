@@ -276,7 +276,6 @@ var KeyStore = /*#__PURE__*/function () {
     var totalWeight = 0;
     keys.forEach(function (key) {
       var obj = createKey(key);
-      totalWeight += obj.weight;
 
       _this._keys.push(obj);
 
@@ -1163,7 +1162,7 @@ var ExactMatch = /*#__PURE__*/function (_BaseMatch) {
   }, {
     key: "multiRegex",
     get: function get() {
-      return /^="(.*)"$/;
+      return /^="([\s\S]*)"$/;
     }
   }, {
     key: "singleRegex",
@@ -1205,7 +1204,7 @@ var InverseExactMatch = /*#__PURE__*/function (_BaseMatch) {
   }, {
     key: "multiRegex",
     get: function get() {
-      return /^!"(.*)"$/;
+      return /^!"([\s\S]*)"$/;
     }
   }, {
     key: "singleRegex",
@@ -1246,7 +1245,7 @@ var PrefixExactMatch = /*#__PURE__*/function (_BaseMatch) {
   }, {
     key: "multiRegex",
     get: function get() {
-      return /^\^"(.*)"$/;
+      return /^\^"([\s\S]*)"$/;
     }
   }, {
     key: "singleRegex",
@@ -1287,7 +1286,7 @@ var InversePrefixExactMatch = /*#__PURE__*/function (_BaseMatch) {
   }, {
     key: "multiRegex",
     get: function get() {
-      return /^!\^"(.*)"$/;
+      return /^!\^"([\s\S]*)"$/;
     }
   }, {
     key: "singleRegex",
@@ -1328,7 +1327,7 @@ var SuffixExactMatch = /*#__PURE__*/function (_BaseMatch) {
   }, {
     key: "multiRegex",
     get: function get() {
-      return /^"(.*)"\$$/;
+      return /^"([\s\S]*)"\$$/;
     }
   }, {
     key: "singleRegex",
@@ -1369,7 +1368,7 @@ var InverseSuffixExactMatch = /*#__PURE__*/function (_BaseMatch) {
   }, {
     key: "multiRegex",
     get: function get() {
-      return /^!"(.*)"\$$/;
+      return /^!"([\s\S]*)"\$$/;
     }
   }, {
     key: "singleRegex",
@@ -1436,7 +1435,7 @@ var FuzzyMatch = /*#__PURE__*/function (_BaseMatch) {
   }, {
     key: "multiRegex",
     get: function get() {
-      return /^"(.*)"$/;
+      return /^"([\s\S]*)"$/;
     }
   }, {
     key: "singleRegex",
@@ -1487,7 +1486,7 @@ var IncludeMatch = /*#__PURE__*/function (_BaseMatch) {
   }, {
     key: "multiRegex",
     get: function get() {
-      return /^'"(.*)"$/;
+      return /^'"([\s\S]*)"$/;
     }
   }, {
     key: "singleRegex",

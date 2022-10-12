@@ -99,8 +99,6 @@ class KeyStore {
     keys.forEach((key) => {
       let obj = createKey(key);
 
-      totalWeight += obj.weight;
-
       this._keys.push(obj);
       this._keyMap[obj.id] = obj;
 
@@ -889,7 +887,7 @@ class ExactMatch extends BaseMatch {
     return 'exact'
   }
   static get multiRegex() {
-    return /^="(.*)"$/
+    return /^="(.*)"$/s
   }
   static get singleRegex() {
     return /^=(.*)$/
@@ -915,7 +913,7 @@ class InverseExactMatch extends BaseMatch {
     return 'inverse-exact'
   }
   static get multiRegex() {
-    return /^!"(.*)"$/
+    return /^!"(.*)"$/s
   }
   static get singleRegex() {
     return /^!(.*)$/
@@ -942,7 +940,7 @@ class PrefixExactMatch extends BaseMatch {
     return 'prefix-exact'
   }
   static get multiRegex() {
-    return /^\^"(.*)"$/
+    return /^\^"(.*)"$/s
   }
   static get singleRegex() {
     return /^\^(.*)$/
@@ -968,7 +966,7 @@ class InversePrefixExactMatch extends BaseMatch {
     return 'inverse-prefix-exact'
   }
   static get multiRegex() {
-    return /^!\^"(.*)"$/
+    return /^!\^"(.*)"$/s
   }
   static get singleRegex() {
     return /^!\^(.*)$/
@@ -994,7 +992,7 @@ class SuffixExactMatch extends BaseMatch {
     return 'suffix-exact'
   }
   static get multiRegex() {
-    return /^"(.*)"\$$/
+    return /^"(.*)"\$$/s
   }
   static get singleRegex() {
     return /^(.*)\$$/
@@ -1020,7 +1018,7 @@ class InverseSuffixExactMatch extends BaseMatch {
     return 'inverse-suffix-exact'
   }
   static get multiRegex() {
-    return /^!"(.*)"\$$/
+    return /^!"(.*)"\$$/s
   }
   static get singleRegex() {
     return /^!(.*)\$$/
@@ -1065,7 +1063,7 @@ class FuzzyMatch extends BaseMatch {
     return 'fuzzy'
   }
   static get multiRegex() {
-    return /^"(.*)"$/
+    return /^"(.*)"$/s
   }
   static get singleRegex() {
     return /^(.*)$/
@@ -1085,7 +1083,7 @@ class IncludeMatch extends BaseMatch {
     return 'include'
   }
   static get multiRegex() {
-    return /^'"(.*)"$/
+    return /^'"(.*)"$/s
   }
   static get singleRegex() {
     return /^'(.*)$/

@@ -280,7 +280,6 @@
       var totalWeight = 0;
       keys.forEach(function (key) {
         var obj = createKey(key);
-        totalWeight += obj.weight;
 
         _this._keys.push(obj);
 
@@ -1167,7 +1166,7 @@
     }, {
       key: "multiRegex",
       get: function get() {
-        return /^="(.*)"$/;
+        return /^="([\s\S]*)"$/;
       }
     }, {
       key: "singleRegex",
@@ -1209,7 +1208,7 @@
     }, {
       key: "multiRegex",
       get: function get() {
-        return /^!"(.*)"$/;
+        return /^!"([\s\S]*)"$/;
       }
     }, {
       key: "singleRegex",
@@ -1250,7 +1249,7 @@
     }, {
       key: "multiRegex",
       get: function get() {
-        return /^\^"(.*)"$/;
+        return /^\^"([\s\S]*)"$/;
       }
     }, {
       key: "singleRegex",
@@ -1291,7 +1290,7 @@
     }, {
       key: "multiRegex",
       get: function get() {
-        return /^!\^"(.*)"$/;
+        return /^!\^"([\s\S]*)"$/;
       }
     }, {
       key: "singleRegex",
@@ -1332,7 +1331,7 @@
     }, {
       key: "multiRegex",
       get: function get() {
-        return /^"(.*)"\$$/;
+        return /^"([\s\S]*)"\$$/;
       }
     }, {
       key: "singleRegex",
@@ -1373,7 +1372,7 @@
     }, {
       key: "multiRegex",
       get: function get() {
-        return /^!"(.*)"\$$/;
+        return /^!"([\s\S]*)"\$$/;
       }
     }, {
       key: "singleRegex",
@@ -1440,7 +1439,7 @@
     }, {
       key: "multiRegex",
       get: function get() {
-        return /^"(.*)"$/;
+        return /^"([\s\S]*)"$/;
       }
     }, {
       key: "singleRegex",
@@ -1491,7 +1490,7 @@
     }, {
       key: "multiRegex",
       get: function get() {
-        return /^'"(.*)"$/;
+        return /^'"([\s\S]*)"$/;
       }
     }, {
       key: "singleRegex",

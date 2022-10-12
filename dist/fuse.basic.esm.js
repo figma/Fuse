@@ -101,8 +101,6 @@ class KeyStore {
     keys.forEach((key) => {
       let obj = createKey(key);
 
-      totalWeight += obj.weight;
-
       this._keys.push(obj);
       this._keyMap[obj.id] = obj;
 

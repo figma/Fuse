@@ -197,7 +197,6 @@
       var totalWeight = 0;
       keys.forEach(function (key) {
         var obj = createKey(key);
-        totalWeight += obj.weight;
 
         _this._keys.push(obj);
 
