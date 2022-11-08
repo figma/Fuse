@@ -906,7 +906,7 @@
         isCaseSensitive: isCaseSensitive,
         ignoreLocation: ignoreLocation
       };
-      this.pattern = isCaseSensitive ? pattern : pattern.toLowerCase();
+      this.pattern = isCaseSensitive ? pattern : pattern.toLocaleLowerCase();
       this.chunks = [];
 
       if (!this.pattern.length) {
@@ -950,7 +950,7 @@
             includeMatches = _this$options.includeMatches;
 
         if (!isCaseSensitive) {
-          text = text.toLowerCase();
+          text = text.toLocaleLowerCase();
         } // Exact match
 
 

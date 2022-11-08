@@ -985,7 +985,7 @@ var BitapSearch = /*#__PURE__*/function () {
       isCaseSensitive: isCaseSensitive,
       ignoreLocation: ignoreLocation
     };
-    this.pattern = isCaseSensitive ? pattern : pattern.toLowerCase();
+    this.pattern = isCaseSensitive ? pattern : pattern.toLocaleLowerCase();
     this.chunks = [];
 
     if (!this.pattern.length) {
@@ -1029,7 +1029,7 @@ var BitapSearch = /*#__PURE__*/function () {
           includeMatches = _this$options.includeMatches;
 
       if (!isCaseSensitive) {
-        text = text.toLowerCase();
+        text = text.toLocaleLowerCase();
       } // Exact match
 
 
@@ -1618,7 +1618,7 @@ var ExtendedSearch = /*#__PURE__*/function () {
       threshold: threshold,
       distance: distance
     };
-    this.pattern = isCaseSensitive ? pattern : pattern.toLowerCase();
+    this.pattern = isCaseSensitive ? pattern : pattern.toLocaleLowerCase();
     this.query = parseQuery(this.pattern, this.options);
   }
 
@@ -1637,7 +1637,7 @@ var ExtendedSearch = /*#__PURE__*/function () {
       var _this$options = this.options,
           includeMatches = _this$options.includeMatches,
           isCaseSensitive = _this$options.isCaseSensitive;
-      text = isCaseSensitive ? text : text.toLowerCase();
+      text = isCaseSensitive ? text : text.toLocaleLowerCase();
       var numMatches = 0;
       var allIndices = [];
       var totalScore = 0; // ORs

@@ -754,7 +754,7 @@ class BitapSearch {
       ignoreLocation
     };
 
-    this.pattern = isCaseSensitive ? pattern : pattern.toLowerCase();
+    this.pattern = isCaseSensitive ? pattern : pattern.toLocaleLowerCase();
 
     this.chunks = [];
 
@@ -795,7 +795,7 @@ class BitapSearch {
     const { isCaseSensitive, includeMatches } = this.options;
 
     if (!isCaseSensitive) {
-      text = text.toLowerCase();
+      text = text.toLocaleLowerCase();
     }
 
     // Exact match
