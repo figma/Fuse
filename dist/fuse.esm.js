@@ -752,7 +752,7 @@ class BitapSearch {
       ignoreLocation
     };
 
-    this.pattern = isCaseSensitive ? pattern : pattern.toLowerCase();
+    this.pattern = isCaseSensitive ? pattern : pattern.toLocaleLowerCase();
 
     this.chunks = [];
 
@@ -793,7 +793,7 @@ class BitapSearch {
     const { isCaseSensitive, includeMatches } = this.options;
 
     if (!isCaseSensitive) {
-      text = text.toLowerCase();
+      text = text.toLocaleLowerCase();
     }
 
     // Exact match
@@ -1233,7 +1233,7 @@ class ExtendedSearch {
       distance
     };
 
-    this.pattern = isCaseSensitive ? pattern : pattern.toLowerCase();
+    this.pattern = isCaseSensitive ? pattern : pattern.toLocaleLowerCase();
     this.query = parseQuery(this.pattern, this.options);
   }
 
@@ -1253,7 +1253,7 @@ class ExtendedSearch {
 
     const { includeMatches, isCaseSensitive } = this.options;
 
-    text = isCaseSensitive ? text : text.toLowerCase();
+    text = isCaseSensitive ? text : text.toLocaleLowerCase();
 
     let numMatches = 0;
     let allIndices = [];

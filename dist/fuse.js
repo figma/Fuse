@@ -989,7 +989,7 @@
         isCaseSensitive: isCaseSensitive,
         ignoreLocation: ignoreLocation
       };
-      this.pattern = isCaseSensitive ? pattern : pattern.toLowerCase();
+      this.pattern = isCaseSensitive ? pattern : pattern.toLocaleLowerCase();
       this.chunks = [];
 
       if (!this.pattern.length) {
@@ -1033,7 +1033,7 @@
             includeMatches = _this$options.includeMatches;
 
         if (!isCaseSensitive) {
-          text = text.toLowerCase();
+          text = text.toLocaleLowerCase();
         } // Exact match
 
 
@@ -1622,7 +1622,7 @@
         threshold: threshold,
         distance: distance
       };
-      this.pattern = isCaseSensitive ? pattern : pattern.toLowerCase();
+      this.pattern = isCaseSensitive ? pattern : pattern.toLocaleLowerCase();
       this.query = parseQuery(this.pattern, this.options);
     }
 
@@ -1641,7 +1641,7 @@
         var _this$options = this.options,
             includeMatches = _this$options.includeMatches,
             isCaseSensitive = _this$options.isCaseSensitive;
-        text = isCaseSensitive ? text : text.toLowerCase();
+        text = isCaseSensitive ? text : text.toLocaleLowerCase();
         var numMatches = 0;
         var allIndices = [];
         var totalScore = 0; // ORs
