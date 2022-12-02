@@ -51,6 +51,7 @@ export default class FuseIndex {
   // Adds a doc to the end of the index
   add(doc) {
     const idx = this.size()
+    this.docs.push(doc)
 
     if (isString(doc)) {
       this._addString(doc, idx)
@@ -61,6 +62,7 @@ export default class FuseIndex {
   // Removes the doc at the specified index of the index
   removeAt(idx) {
     this.records.splice(idx, 1)
+    this.docs.splice(idx, 1)
 
     // Change ref index of every subsquent doc
     for (let i = idx, len = this.size(); i < len; i += 1) {

@@ -469,6 +469,7 @@ var FuseIndex = /*#__PURE__*/function () {
     key: "add",
     value: function add(doc) {
       var idx = this.size();
+      this.docs.push(doc);
 
       if (isString(doc)) {
         this._addString(doc, idx);
@@ -480,7 +481,8 @@ var FuseIndex = /*#__PURE__*/function () {
   }, {
     key: "removeAt",
     value: function removeAt(idx) {
-      this.records.splice(idx, 1); // Change ref index of every subsquent doc
+      this.records.splice(idx, 1);
+      this.docs.splice(idx, 1); // Change ref index of every subsquent doc
 
       for (var i = idx, len = this.size(); i < len; i += 1) {
         this.records[i].i -= 1;
@@ -1215,16 +1217,16 @@ var Fuse$1 = /*#__PURE__*/function () {
   _createClass(Fuse, [{
     key: "setCollection",
     value: function setCollection(docs, index) {
-      this._docs = docs;
-
       if (index && !(index instanceof FuseIndex)) {
         throw new Error(INCORRECT_INDEX_TYPE);
       }
 
-      this._myIndex = index || createIndex(this.options.keys, this._docs, {
+      this._myIndex = index || createIndex(this.options.keys, docs, {
         getFn: this.options.getFn,
         fieldNormWeight: this.options.fieldNormWeight
       });
+
+      this._myIndex.setSources(docs);
     }
   }, {
     key: "add",
@@ -1232,8 +1234,6 @@ var Fuse$1 = /*#__PURE__*/function () {
       if (!isDefined(doc)) {
         return;
       }
-
-      this._docs.push(doc);
 
       this._myIndex.add(doc);
     }
@@ -1246,9 +1246,10 @@ var Fuse$1 = /*#__PURE__*/function () {
         return false;
       };
       var results = [];
+      var indexDocs = this._myIndex.docs;
 
-      for (var i = 0, len = this._docs.length; i < len; i += 1) {
-        var doc = this._docs[i];
+      for (var i = 0, len = indexDocs.length; i < len; i += 1) {
+        var doc = indexDocs[i];
 
         if (predicate(doc, i)) {
           this.removeAt(i);
@@ -1263,8 +1264,6 @@ var Fuse$1 = /*#__PURE__*/function () {
   }, {
     key: "removeAt",
     value: function removeAt(idx) {
-      this._docs.splice(idx, 1);
-
       this._myIndex.removeAt(idx);
     }
   }, {
@@ -1285,7 +1284,7 @@ var Fuse$1 = /*#__PURE__*/function () {
           shouldSort = _this$options.shouldSort,
           sortFn = _this$options.sortFn,
           ignoreFieldNorm = _this$options.ignoreFieldNorm;
-      var results = isString(query) ? isString(this._docs[0]) ? this._searchStringList(query) : this._searchObjectList(query) : this._searchLogical(query);
+      var results = isString(query) ? isString(this._myIndex.docs[0]) ? this._searchStringList(query) : this._searchObjectList(query) : this._searchLogical(query);
       computeScore(results, {
         ignoreFieldNorm: ignoreFieldNorm
       });
@@ -1298,7 +1297,7 @@ var Fuse$1 = /*#__PURE__*/function () {
         results = results.slice(0, limit);
       }
 
-      return format(results, this._docs, {
+      return format(results, this._myIndex.docs, {
         includeMatches: includeMatches,
         includeScore: includeScore
       });

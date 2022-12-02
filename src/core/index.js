@@ -25,18 +25,19 @@ export default class Fuse {
   }
 
   setCollection(docs, index) {
-    this._docs = docs
-
     if (index && !(index instanceof FuseIndex)) {
       throw new Error(ErrorMsg.INCORRECT_INDEX_TYPE)
     }
 
     this._myIndex =
       index ||
-      createIndex(this.options.keys, this._docs, {
+      createIndex(this.options.keys, docs, {
         getFn: this.options.getFn,
         fieldNormWeight: this.options.fieldNormWeight
       })
+    if (index) {
+      this._myIndex.setSources(docs)
+    }
   }
 
   add(doc) {
@@ -44,15 +45,15 @@ export default class Fuse {
       return
     }
 
-    this._docs.push(doc)
     this._myIndex.add(doc)
   }
 
   remove(predicate = (/* doc, idx */) => false) {
     const results = []
-
-    for (let i = 0, len = this._docs.length; i < len; i += 1) {
-      const doc = this._docs[i]
+    const indexDocs = this._myIndex.docs
+    
+    for (let i = 0, len = indexDocs.length; i < len; i += 1) {
+      const doc = indexDocs[i]
       if (predicate(doc, i)) {
         this.removeAt(i)
         i -= 1
@@ -61,12 +62,10 @@ export default class Fuse {
         results.push(doc)
       }
     }
-
     return results
   }
 
   removeAt(idx) {
-    this._docs.splice(idx, 1)
     this._myIndex.removeAt(idx)
   }
 
@@ -84,7 +83,7 @@ export default class Fuse {
     } = this.options
 
     let results = isString(query)
-      ? isString(this._docs[0])
+      ? isString(this._myIndex.docs[0])
         ? this._searchStringList(query)
         : this._searchObjectList(query)
       : this._searchLogical(query)
@@ -99,7 +98,7 @@ export default class Fuse {
       results = results.slice(0, limit)
     }
 
-    return format(results, this._docs, {
+    return format(results, this._myIndex.docs, {
       includeMatches,
       includeScore
     })

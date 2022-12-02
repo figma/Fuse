@@ -150,6 +150,5 @@ describe('Searching', () => {
 
     expect(results.length).toBe(2)
     expect(fuse.getIndex().size()).toBe(1)
-    expect(fuse._docs.length).toBe(1)
   })
 })

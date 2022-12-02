@@ -356,6 +356,7 @@ class FuseIndex {
   // Adds a doc to the end of the index
   add(doc) {
     const idx = this.size();
+    this.docs.push(doc);
 
     if (isString(doc)) {
       this._addString(doc, idx);
@@ -366,6 +367,7 @@ class FuseIndex {
   // Removes the doc at the specified index of the index
   removeAt(idx) {
     this.records.splice(idx, 1);
+    this.docs.splice(idx, 1);
 
     // Change ref index of every subsquent doc
     for (let i = idx, len = this.size(); i < len; i += 1) {
@@ -1518,18 +1520,18 @@ class Fuse {
   }
 
   setCollection(docs, index) {
-    this._docs = docs;
-
     if (index && !(index instanceof FuseIndex)) {
       throw new Error(INCORRECT_INDEX_TYPE)
     }
 
     this._myIndex =
       index ||
-      createIndex(this.options.keys, this._docs, {
+      createIndex(this.options.keys, docs, {
         getFn: this.options.getFn,
         fieldNormWeight: this.options.fieldNormWeight
       });
+
+    this._myIndex.setSources(docs);
   }
 
   add(doc) {
@@ -1537,15 +1539,15 @@ class Fuse {
       return
     }
 
-    this._docs.push(doc);
     this._myIndex.add(doc);
   }
 
   remove(predicate = (/* doc, idx */) => false) {
     const results = [];
-
-    for (let i = 0, len = this._docs.length; i < len; i += 1) {
-      const doc = this._docs[i];
+    const indexDocs = this._myIndex.docs;
+    
+    for (let i = 0, len = indexDocs.length; i < len; i += 1) {
+      const doc = indexDocs[i];
       if (predicate(doc, i)) {
         this.removeAt(i);
         i -= 1;
@@ -1554,12 +1556,10 @@ class Fuse {
         results.push(doc);
       }
     }
-
     return results
   }
 
   removeAt(idx) {
-    this._docs.splice(idx, 1);
     this._myIndex.removeAt(idx);
   }
 
@@ -1577,7 +1577,7 @@ class Fuse {
     } = this.options;
 
     let results = isString(query)
-      ? isString(this._docs[0])
+      ? isString(this._myIndex.docs[0])
         ? this._searchStringList(query)
         : this._searchObjectList(query)
       : this._searchLogical(query);
@@ -1592,7 +1592,7 @@ class Fuse {
       results = results.slice(0, limit);
     }
 
-    return format(results, this._docs, {
+    return format(results, this._myIndex.docs, {
       includeMatches,
       includeScore
     })
