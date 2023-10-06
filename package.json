@@ -38,8 +38,7 @@
     "docs:bump": "node ./scripts/bump-docs.js",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "docs:release": "./scripts/deploy-docs.sh",
-    "prepare": "husky install"
+    "docs:release": "./scripts/deploy-docs.sh"
   },
   "standard-version": {
     "scripts": {
